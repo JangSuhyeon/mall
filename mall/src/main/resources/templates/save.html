@@ -1,0 +1,47 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout-edit">
+<div layout:fragment="content">
+  <div class="main" id="fullpage">
+    <div class="edit-container">
+      <h2>작품 등록</h2>
+      <form enctype="multipart/form-data" id="form">
+        <ul class="edit-form">
+          <li class="title">Title</li>
+          <li class="content">
+            <input type="text" th:id="title" placeholder="작품명을 입력해주세요">
+          </li>
+          <li class="title">Artist</li>
+          <li class="content">
+            <input type="text" th:id="artist" placeholder="작가명을 입력해주세요">
+          </li>
+          <li class="title">Description</li>
+          <li class="content">
+            <input type="text" th:id="description" placeholder="설명을 입력해주세요">
+          </li>
+          <li class="title">Price</li>
+          <li class="content">
+            <input type="text" th:id="price" placeholder="판매금액을 입력해주세요">
+          </li>
+          <li class="title">Image</li>
+          <li class="content">
+            <div class="filebox">
+              <input type="file" id="file" name="file">
+
+              <input class="upload-name" value="파일을 선택해주세요">
+              <label for="file">파일선택</label>
+            </div>
+          </li>
+          <li>
+            <a class="btn-save" th:id="btn-save">등 록</a>
+          </li>
+        </ul>
+      </form>
+    </div>
+    </div>
+    <script>
+      $("#file").on('change',function(){
+        var fileName = $("#file").val();
+        $(".upload-name").val(fileName);
+      });
+    </script>
+</div>
+</html>

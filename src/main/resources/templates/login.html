@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout-login">
+<div-- layout:fragment="content">
+    <div class="main">
+        <div class="login-container">
+            <div class="left">
+                <div class="left-container">
+                    <div class="left-wrapper">
+                        <h2>LOGIN</h2>
+                        <div class="btn">
+                            <a th:href="@{/oauth2/authorization/google}" class="google">
+                                <span class="logo"><img src="/images/google.png"></span>
+                                <span class="txt"><span>Login With Google</span></span>
+                            </a>
+                            <a th:href="@{/oauth2/authorization/naver}" class="naver">
+                                <span class="logo"><img src="/images/naver.png"></span>
+                                <span class="txt"><span>Login With Naver</span></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+                <img src="images/login.jpg">
+            </div>
+        </div>
+    </div>
+</div>
+</html>

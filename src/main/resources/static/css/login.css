@@ -1,0 +1,101 @@
+.main {
+    padding:0;
+}
+.login-container {
+    width:960px;
+    height:550px;
+    box-sizing: border-box;
+    margin:0 auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0) 0px 5px 15px;
+}
+.login-container::after {
+    display: block;
+    clear:both;
+    content:'';
+}
+.login-container > div {
+    float:left;
+    width:50%;
+    height:100%;
+    background:#fff;
+}
+.login-container > div.left {
+    border-radius: 10px 0 0 10px;
+}
+.login-container > div.left > .left-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:100%;
+}
+.login-container > div.left .left-wrapper {
+    margin-bottom:30px;
+}
+.login-container > div.left .left-wrapper > h2 {
+    text-align:center;
+    font-size:26px;
+    font-weight:bold;
+    margin-bottom:50px;
+}
+.login-container > div.left .btn {
+    text-align: center;
+}
+.login-container > div.left .btn > a {
+    display: inline-block;
+    width:300px;
+    height:45px;
+    border-radius: 10px;
+}
+.login-container > div.left .btn > a.google {
+    background-color: #f44235;
+    margin-bottom:20px;
+}
+.login-container > div.left .btn > a.naver {
+    background-color: #1ec800;
+}
+.login-container > div.left .btn > a::after {
+    display: block;
+    clear: both;
+    content:'';
+}
+.login-container > div.left .btn > a > span.logo {
+    float:left;
+    display: inline-block;
+    width:45px;
+    height:45px;
+    text-align: center;
+    border-radius: 10px 0 0 10px;
+}
+.login-container > div.left .btn > a.google > span.logo {
+    background-color: #c63930;
+}
+.login-container > div.left .btn > a.naver > span.logo {
+    background-color: #207725;
+}
+.login-container > div.left .btn > a > span.logo > img {
+    width:16px;
+    height:16px;
+    margin-top:14.5px;
+}
+.login-container > div.left .btn > a > span.txt {
+    float:left;
+    width: calc(100% - 45px);
+    text-align:Center;
+}
+.login-container > div.left .btn > a > span.txt > span {
+    display: inline-block;
+    width:100%;
+    font-size:16px;
+    margin-top:14px;
+    color:#fff;
+}
+.login-container > div.right {
+    border-radius: 0 10px 10px 0;
+    overflow: hidden;
+}
+.login-container > div.right > img {
+    width:auto;
+    height:100%;
+}

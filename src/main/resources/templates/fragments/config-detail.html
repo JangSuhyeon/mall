@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:fragment="configFragment">
+  <title>스프링 부트 웹 서비스</title>
+  <meta charset="UTF-8" />
+  <!-- 공통으로 쓰이는 css파일을넣는다.-->
+  <link rel="stylesheet" href="/css/reset.css"/>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link rel="stylesheet" href="/css/detail.css"/>
+  <link rel="stylesheet" href="/css/swiper.min.css"/>
+  <link rel="stylesheet" href="/css/fullpage.css"/>
+
+  <!-- 컨텐츠페이지의 CSS 영역이 들어감 -->
+  <!--th:block layout:fragment="css"></th:block-->
+
+  <!-- 공통으로 쓰이는 js파일을넣는다.-->
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <script src="/js/swiper.min.js"></script>
+  <script src="/js/fullpage.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+  <!-- 컨텐츠페이지의 스크립트 영역이 들어감 -->
+  <!--th:block layout:fragment="script"></th:block-->
+</head>
+</html>

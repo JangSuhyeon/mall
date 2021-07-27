@@ -1,0 +1,50 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout-detail">
+<div-- layout:fragment="content">
+
+    <div class="main" id="fullpage">
+        <div class="page1 page section">
+            <div class="container">
+                <img src="/images/nature1.jpg" class="bg">
+            </div>
+            <div class="bottom">
+                <img src="/images/arrow1.png">
+            </div>
+        </div>
+
+        <div class="page2 page section">
+            <div class="left">
+                <img th:src="@{/images/{fileName}(fileName=${art.getArtImage().getFilename()})}">
+            </div>
+            <div class="right">
+                <div class="container">
+                    <ul>
+                        <li class="subject">Title</li>
+                        <li class="content" th:text="${art.title}"></li>
+                        <li class="subject">Artist</li>
+                        <li class="content" th:text="${art.artist}"></li>
+                        <li class="subject">Description</li>
+                        <li class="content"  th:text="${art.description}"></li>
+                        <li class="price">₩<span th:text="${#numbers.formatDecimal(art.price, 0, 'COMMA', 0, 'POINT')}"></span></li>
+                        <li class="btn"><a href="/">작품구매<img src="/images/arrow2.png"></a></li>
+                        <li th:type="hidden" th:id="id" th:value="${art.id}"></li>
+                        <li class="btn-group">
+                            <a th:href="@{/art/update/{id}(id = ${art.id})}">수정</a>
+                            <a th:id="btn-delete">삭제</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#fullpage').fullpage({
+                autoScrolling:true,
+                scrollHorizontally:true,
+                scrollingSpeed:700
+            })
+        })
+    </script>
+
+</div>
+</html>

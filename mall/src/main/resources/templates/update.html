@@ -1,0 +1,49 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout-edit">
+<div layout:fragment="content">
+    <div class="main" id="fullpage">
+        <div class="edit-container">
+            <h2>작품 등록</h2>
+            <form enctype="multipart/form-data" id="form">
+                <ul class="edit-form">
+                    <li><input th:type="hidden" th:id="id" th:value="${art.id}"></li>
+                    <li class="title">Title</li>
+                    <li class="content">
+                        <input type="text" th:id="title" th:value="${art.title}">
+                    </li>
+                    <li class="title">Artist</li>
+                    <li class="content">
+                        <input type="text" th:id="artist" th:value="${art.artist}" readonly>
+                    </li>
+                    <li class="title">Description</li>
+                    <li class="content">
+                        <input type="text" th:id="description" th:value="${art.description}">
+                    </li>
+                    <li class="title">Price</li>
+                    <li class="content">
+                        <input type="text" th:id="price" th:value="${art.price}">
+                    </li>
+                    <li class="title">Image</li>
+                    <li class="content">
+                        <div class="filebox">
+                            <input type="file" id="file" name="file">
+
+                            <input class="upload-name" value="파일을 선택해주세요">
+                            <label for="file">파일선택</label>
+                        </div>
+                    </li>
+                    <li class="btn-group">
+                        <a th:href="@{/art/detail/{id}(id=${art.id})}" role="button" class="btn btn-secondary">취소</a>
+                        <a class="btn-update" th:id="btn-update">수정 완료</a>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+    <script>
+        $("#file").on('change',function(){
+            var fileName = $("#file").val();
+            $(".upload-name").val(fileName);
+        });
+    </script>
+</div>
+</html>

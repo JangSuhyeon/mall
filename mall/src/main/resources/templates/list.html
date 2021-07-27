@@ -1,0 +1,53 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout-list">
+<div-- layout:fragment="content">
+  <div class="main">
+    <div class="sub-menu">
+      <ul>
+        <li>
+          <a href="#">첫 번째 토글<img src="/images/plus.png"></a>
+          <p>첫 번째 내용</p>
+        </li>
+        <li>
+          <a href="#">두 번째 토글<img src="/images/plus.png"></a>
+          <p>두 번째 내용</p>
+        </li>
+        <li>
+          <a href="#">세 번째 토글<img src="/images/plus.png"></a>
+          <p>세 번째 내용</p>
+        </li>
+      </ul>
+    </div>
+    <script>
+      $(document).ready(function(){
+        $(".sub-menu > ul > li p").hide();
+        // $("ul > li:first-child a").next().show();
+        $(".sub-menu > ul > li a").click(function(){
+          $(this).next().slideToggle(300);
+          // $(this).next().slideDown(300);
+          $("ul li a").not(this).next().slideUp(300);
+          return false;
+        });
+        $(".sub-menu > ul > li").eq(0).trigger("click");
+      });
+    </script>
+
+    <div class="art-container">
+      <h2>명화 <span>(<span th:text="${count}"></span>)</span>
+        <a th:href="@{/art/save}" class="btn btn-save" sec:authorize="isAuthenticated()">작품등록</a>
+      </h2>
+      <div class="art-wrapper">
+        <ul>
+          <li th:each="imageArt : ${imageArts}" th:onclick="'location.href=\''+ @{/art/detail/{id}(id = ${imageArt.getId()})} + '\''">
+            <div class="thumb"><img th:src="@{/images/{fileName}(fileName=${imageArt.getArtImage().getFilename()})}"></div>
+            <div class="info">
+              <p th:text="${imageArt.getTitle()}"></p>
+              <p th:text="${imageArt.getArtist()}"></p>
+              <p th:text="${#numbers.formatDecimal(imageArt.getPrice(), 0, 'COMMA', 0, 'POINT')}"></p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</html>
