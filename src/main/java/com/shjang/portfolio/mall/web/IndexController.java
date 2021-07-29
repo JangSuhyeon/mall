@@ -77,9 +77,15 @@ public class IndexController {
         model.addAttribute("art",art); //Art
 
         CategoryDto category = categoryService.findById(art.getCategoryId());
+
         model.addAttribute("category",category); //소분류
-        CategoryDto bigCategory = categoryService.findById(category.getSuperId());
-        model.addAttribute("bigCategory",bigCategory); //대분류
+
+        if (category.getSuperId() == null) { //만약 선택 카테고리가 소분류가 없는 경우라면
+            model.addAttribute("bigCategory",category); //해당 카테고리가 대분류로도 들어간다.
+        } else {
+            CategoryDto bigCategory = categoryService.findById(category.getSuperId());
+            model.addAttribute("bigCategory",bigCategory); //대분류
+        }
 
         UserResponseDto userResponseDto = new UserResponseDto(userService.findById(art.getUserId()));
         model.addAttribute("user",userResponseDto); //User

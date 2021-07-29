@@ -14,6 +14,7 @@ public class Category {
 
     @Column(nullable = true)
     private Integer superId;
+
     private String name;
 
 }

@@ -1,0 +1,11 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/order/layout-order">
+<div-- layout:fragment="content">
+    <div class="main">
+      <ul>
+        <li th:each="art : ${arts}">
+            <h2 th:text="${art.getTitle()}"></h2>
+        </li>
+      </ul>
+    </div>
+</div-->
+</html>

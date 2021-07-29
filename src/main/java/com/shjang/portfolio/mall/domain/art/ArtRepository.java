@@ -10,6 +10,4 @@ public interface ArtRepository extends JpaRepository<Art,Long> {
     @Query("SELECT a FROM Art a ORDER BY a.id DESC")
     List<Art> findAllDesc();
 
-
-
 }

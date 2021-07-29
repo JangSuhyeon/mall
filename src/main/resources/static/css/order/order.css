@@ -1,0 +1,174 @@
+/* 주문서 페이지(order.html) */
+.order-page.main-container {
+    width:1350px;
+    padding:100px 150px;
+    box-sizing: border-box;
+    margin:0 auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0) 0px 5px 15px;
+}
+.order-page.main-container > h2 {
+    text-align:center;
+    font-size:26px;
+    font-weight:bold;
+}
+
+.order-page .order-container {
+    margin-top:70px;
+}
+.order-page .order-container::after {
+    display: block;
+    clear: both;
+    content:'';
+}
+.order-page .order-container > * {
+    float:left;
+}
+.order-page .order-wrapper {
+    width:645px;
+}
+.order-page .order-wrapper .order-list {
+    margin-bottom:100px;
+}
+.order-page .order-wrapper .order-list > h2 {
+    font-family: 'Nanum Gothic';
+    font-size:26px;
+    font-weight:bold;
+}
+.order-page .order-wrapper .order-list table {
+    margin-top:20px;
+    border-top:1px solid #000;
+    border-bottom:1px solid #ddd;
+}
+.order-page .order-wrapper .order-list table th {
+    font-size:18px;
+    font-weight:bold;
+    line-height:75px;
+    border-bottom:1px solid #ddd;
+}
+.order-page .order-wrapper .order-list table td {
+    vertical-align: middle;
+    padding:30px 13px;
+}
+.order-page .order-wrapper .order-list table td.name > * {
+    float:left;
+}
+.order-page .order-wrapper .order-list table td.name > p {
+    width:319px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: 'Nanum Gothic';
+    line-height:125px;
+    margin-left:30px;
+    font-weight:bold;
+}
+.order-page .order-wrapper .order-list table span.thumb {
+    display: inline-block;
+    width:125px;
+    height:125px;
+    overflow: hidden;
+}
+.order-page .order-wrapper .order-list table span.thumb > img {
+    width:125px;
+    height:125px;
+}
+.order-page .order-wrapper .order-list table td.price {
+    text-align:center;
+}
+
+.order-page .delivery-info > h2 {
+    font-family: 'Nanum Gothic';
+    font-size:26px;
+    font-weight:bold;
+}
+.order-page .delivery-info > table {
+    width:100%;
+    margin-top:20px;
+    border-top:1px solid #000;
+    border-bottom:1px solid #ddd;
+}
+.order-page .delivery-info > table td {
+    padding:15px 0;
+}
+.order-page .delivery-info > table td.title {
+    width:150px;
+    font-family: 'Nanum Gothic';
+    font-weight:bold;
+    vertical-align: middle;
+}
+.order-page .delivery-info > table td.title .red {
+    color:red;
+    margin-right:3px;
+}
+.order-page .delivery-info > table td.text > * {
+    float:left;
+}
+.order-page .delivery-info > table td > input[type="text"] {
+    height:45px;
+    line-height:45px;
+    width:350px;
+    border:1px solid #ddd;
+}
+.order-page .delivery-info > table td > input[type="button"] {
+    width:calc(100% - 366px);
+    margin-left:10px;
+    height:47px;
+    line-height:47px;
+    background-color: #fff;
+    border:1px solid #000;
+}
+
+.order-page .buy-container {
+    width:355px;
+    margin-left:50px;
+}
+.order-page .buy-container .buy-wrapper {
+    width:100%;
+    padding:50px 30px;
+    box-sizing: border-box;
+    background-color: #f7f7f7;
+}
+.order-page .buy-container .buy-wrapper > h2 {
+    font-family: 'Nanum Gothic';
+    font-size:21px;
+    font-weight: bold;
+    padding-bottom:20px;
+    margin-bottom:20px;
+    border-bottom:1px solid #e7e7e7;
+}
+.order-page .buy-container .buy-wrapper > ul::after{
+    display: block;
+    clear: both;
+    content:'';
+}
+.order-page .buy-container .buy-wrapper > ul > li:first-child {
+    float:left;
+    font-family: 'Nanum Gothic';
+    font-size:16px;
+    font-weight:bold;
+    line-height:30px;
+}
+.order-page .buy-container .buy-wrapper > ul > li:last-child {
+    font-family: 'Nanum Gothic';
+    float:right;
+    font-size:15px;
+    font-weight:bold;
+    line-height:30px;
+}
+.order-page .buy-container .buy-wrapper > ul > li:last-child > span {
+    font-size:26px;
+    margin-right:3px;
+}
+.order-page .buy-container .buy-btn {
+    width:100%;
+    height:60px;
+    line-height:60px;
+    text-align:center;
+    font-size: 16px;
+    background-color: #121212;
+    color:#fff;
+    border:none;
+    margin-top:10px;
+}

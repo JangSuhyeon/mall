@@ -18,9 +18,7 @@ public class LoginController {
     private static final String authorizationRequestBaseUri = "oauth2/authorization";
     Map<String, String> oauth2AuthenticationUrls = new HashMap<>();
     private final ClientRegistrationRepository clientRegistrationRepository;
-    // Lombok 아닌 경우 (@RequiredArgsConstructor 없는 경우)
-    // @Autowired private ClientRegistrationRepository clientRegistrationRepository;
-    @SuppressWarnings("unchecked")
+
     @GetMapping("/login")
     public String getLoginPage(Model model) throws Exception {
         Iterable<ClientRegistration> clientRegistrations = null;

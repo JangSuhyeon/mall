@@ -31,7 +31,7 @@
                         <li class="subject">Seller</li>
                         <li class="content" th:text="${user.getName()}"></li>
                         <li class="price">₩<span th:text="${#numbers.formatDecimal(art.price, 0, 'COMMA', 0, 'POINT')}"></span></li>
-                        <li class="btn"><a href="/">작품구매<img src="/images/arrow2.png"></a></li>
+                        <li class="btn"><a th:href="@{/order/cart/{artId}(artId = ${art.id})}">작품구매<img src="/images/arrow2.png"></a></li>
                         <li th:type="hidden" th:id="id" th:value="${art.id}"></li>
 
                         <li class="btn-group" sec:authorize="isAuthenticated()" th:if="${sessionUser.getEmail().equals(user.getEmail())}">
