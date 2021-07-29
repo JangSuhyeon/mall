@@ -25,17 +25,26 @@ public class OrderController {
 
     @GetMapping("/order/cart/{artId}")
     public String goToCart(@PathVariable Long artId, @LoginUser SessionUser users, Model model) {
-        System.out.println("OrderController 도착!!");
-        List<Long> artIdList = cartService.save(artId, users.getId()); //Cart안에 있는 Art Id List가져오기
 
-        List<ArtResponseDto> art = new ArrayList<>();
+        if(cartService.countByArtId(artId) <= 0){
+            cartService.save(artId, users.getId()); //Cart안에 있는 Art Id List가져오기
+        }
+
+        List<Long> artIdList = cartService.findByUserId(users.getId());
+
+            List<ArtResponseDto> art = new ArrayList<>();
         for (Long id : artIdList) { //Art Id를 통해서 Art 가져오기
             art.add(artService.findById(id));
         }
 
         model.addAttribute("arts",art);
-        System.out.println("OrderController 종료!!");
+
         return "order/cart";
+    }
+
+    @GetMapping("/order/order")
+    public String goToOrder() {
+        return "order/order";
     }
 
 }

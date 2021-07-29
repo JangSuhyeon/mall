@@ -1,11 +1,72 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/order/layout-order">
 <div-- layout:fragment="content">
     <div class="main">
-      <ul>
-        <li th:each="art : ${arts}">
-            <h2 th:text="${art.getTitle()}"></h2>
-        </li>
-      </ul>
+        <div class="main-container order-page">
+            <h2>CART</h2>
+            <div class="order-container">
+                <div class="order-wrapper">
+                    <div class="order-list cart-list">
+                        <h2>총 <span class="checked-count total">0</span>개의 상품</h2>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th style="width:500px;">상품명</th>
+                                <th style="width:145px;">금액</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="art : ${arts}" class="art">
+                                <td class="name">
+                                    <input type="checkbox" checked name="checkbox" id="checkbox">
+                                    <span class="thumb"><img th:src="@{/images/thumbnail/{fileName}(fileName=${art.getArtImage().getFilename()})}"></span>
+                                    <p th:text="${art.getTitle()}"></p>
+                                </td>
+                                <td class="initPrice" th:value="${art.getPrice()}" th:text="${#numbers.formatDecimal(art.getPrice(), 0, 'COMMA', 0, 'POINT')}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="buy-container">
+                    <div class="buy-wrapper">
+                        <h2>총 <span class="total">0</span>개의 상품금액</h2>
+                        <ul>
+                            <li>합계</li>
+                            <li><span th:id="totalPrice"></span>원</li>
+                        </ul>
+                    </div>
+                    <button class="buy-btn">전체 작품 주문</button>
+                    <button class="choice-btn">선택 작품 주문</button>
+                </div>
+            </div>
+        </div>
     </div>
+    <script>
+        $(document).ready(function(){
+            count(); //처음 전체 선택된 상품의 갯수
+            sumary();
+
+            $(".checkbox").change(function() { //선택 상태가 바뀔 때 마다 호출
+                count();
+                sumary();
+            });
+
+            function count() { //선택한 상품 갯수
+                var init_count = $('input:checkbox[name=checkbox]:checked').length;
+                $('.total').text(init_count);
+            }
+
+            function sumary() { //선택한 상품 총 금액
+                var sum = 0;
+                var prices = $('.initPrice').get();
+                for (var i = 0;i < prices.length; i++){
+                    var price = Number(prices[i].value);
+                    sum += price;
+                }
+                $('#totalPrice').text(sum);
+            }
+        });
+    </script>
 </div-->
 </html>

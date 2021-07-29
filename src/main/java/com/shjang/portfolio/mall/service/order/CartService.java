@@ -35,4 +35,9 @@ public class CartService {
         return cartRepository.countByUserId(userId);
     }
 
+    @Transactional
+    public Integer countByArtId(Long artId) {
+        return cartRepository.countByArtId(artId);
+    }
+
 }
