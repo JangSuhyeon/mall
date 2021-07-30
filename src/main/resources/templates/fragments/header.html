@@ -7,6 +7,7 @@
                 <li><a th:href="@{/art/list}">Shop</a></li>
                 <li><a href="">Contact</a></li>
                 <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Login</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/order/cart}">Cart</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/}" th:text="${userName}"></a></li>
             </ul>

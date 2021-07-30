@@ -63,7 +63,7 @@ public class ArtApiController {
         try {
             String origFilename = files.getOriginalFilename(); //원본 파일 이름
             String filename = new MD5Generator(origFilename).toString(); //저장된 파일 이름
-            String savePath = "E:\\Spring Project\\mall\\src\\main\\resources\\static\\images\\thumbnail"; //저장 경로
+            String savePath = "C:\\Users\\shjan\\Desktop\\mall\\mall\\src\\main\\resources\\static\\images\\thumbnail"; //저장 경로
 
             if (!new File(savePath).exists()) {
                 try {

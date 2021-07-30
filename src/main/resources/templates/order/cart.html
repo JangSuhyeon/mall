@@ -17,11 +17,12 @@
                             <tbody>
                             <tr th:each="art : ${arts}" class="art">
                                 <td class="name">
-                                    <input type="checkbox" checked name="checkbox" id="checkbox">
+                                    <input th:type="hidden" th:value="${art.getId()}" class="hidden-art-id">
+                                    <input type="checkbox" name="checkbox" class="checkbox" th:value="${art.getPrice()}" checked>
                                     <span class="thumb"><img th:src="@{/images/thumbnail/{fileName}(fileName=${art.getArtImage().getFilename()})}"></span>
                                     <p th:text="${art.getTitle()}"></p>
                                 </td>
-                                <td class="initPrice" th:value="${art.getPrice()}" th:text="${#numbers.formatDecimal(art.getPrice(), 0, 'COMMA', 0, 'POINT')}"></td>
+                                <td class="price"><span th:text="${#numbers.formatDecimal(art.getPrice(), 0, 'COMMA', 0, 'POINT')}"></span>원</td>
                             </tr>
                             </tbody>
                         </table>
@@ -37,7 +38,7 @@
                         </ul>
                     </div>
                     <button class="buy-btn">전체 작품 주문</button>
-                    <button class="choice-btn">선택 작품 주문</button>
+                    <button class="choice-btn" th:id="choice-btn">선택 작품 주문</button>
                 </div>
             </div>
         </div>
@@ -59,11 +60,13 @@
 
             function sumary() { //선택한 상품 총 금액
                 var sum = 0;
-                var prices = $('.initPrice').get();
+                var prices = $('.checkbox').get();
+                console.log(prices.length);
                 for (var i = 0;i < prices.length; i++){
                     var price = Number(prices[i].value);
                     sum += price;
                 }
+                sum = String(sum).replace(/\B(?=(\d{3})+(?!\d))/g, ","); //천 단위 콤마 찍기
                 $('#totalPrice').text(sum);
             }
         });
