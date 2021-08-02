@@ -17,10 +17,10 @@
                             <tbody>
                             <tr th:each="art : ${arts}">
                                 <td class="name">
-                                    <span class="thumb"><img src="images/art1.jpg"></span>
-                                    <p th:text="{art.getTitle()}">작품명입니다.작품명입니다.작품명입니다.작품명입니다.작품명입니다.작품명입니다.</p>
+                                    <span class="thumb"><img th:src="@{/images/thumbnail/{fileName}(fileName=${art.getArtImage().getFilename()})}"></span>
+                                    <p th:text="${art.getTitle()}">작품명입니다.작품명입니다.작품명입니다.작품명입니다.작품명입니다.작품명입니다.</p>
                                 </td>
-                                <td class="price">45,000원</td>
+                                <td class="price" th:text="${art.getPrice()}">45,000원</td>
                             </tr>
                             </tbody>
                         </table>

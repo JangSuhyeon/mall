@@ -18,7 +18,7 @@
                             <tr th:each="art : ${arts}" class="art">
                                 <td class="name">
                                     <input th:type="hidden" th:value="${art.getId()}" class="hidden-art-id">
-                                    <input type="checkbox" name="checkbox" class="checkbox" th:value="${art.getPrice()}" checked>
+                                    <input type="checkbox" name="checkbox" class="checkbox" th:value="${art.getId()}" checked>
                                     <span class="thumb"><img th:src="@{/images/thumbnail/{fileName}(fileName=${art.getArtImage().getFilename()})}"></span>
                                     <p th:text="${art.getTitle()}"></p>
                                 </td>
@@ -37,7 +37,8 @@
                             <li><span th:id="totalPrice"></span>원</li>
                         </ul>
                     </div>
-                    <button class="buy-btn">전체 작품 주문</button>
+                    <input th:type="hidden" th:value="${userId}" class="userId">
+                    <button class="buy-btn" th:id="all-choice-btn">전체 작품 주문</button>
                     <button class="choice-btn" th:id="choice-btn">선택 작품 주문</button>
                 </div>
             </div>
