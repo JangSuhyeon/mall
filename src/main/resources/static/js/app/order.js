@@ -7,19 +7,18 @@ var order = {
     },
 
     goToChoiceOrder : function () {
-        // name이 같은 체크박스의 값들을 배열에 담는다.
-        var checkboxValues = [];
-        $("input[name='checkbox']:checked").each(function(i) {
-            checkboxValues.push($(this).prev('.hidden-art-id').val());
+        var checkArr = [];
+        $('.checkbox:checked').each(function () {
+            checkArr.push($(this).val());
         });
-
-        // 사용자 ID(문자열)와 체크박스 값들(배열)을 name/value 형태로 담는다.
-        var allData = { "artIdList": checkboxValues };
+        alert(checkArr);
 
         $.ajax({
             url: "/order/order",
             type: 'GET',
-            data: allData
+            data: {
+                art_id : checkArr
+            }
         }).done(function () {
             alert('주문서 이동');
             window.location.href = '/order/order';

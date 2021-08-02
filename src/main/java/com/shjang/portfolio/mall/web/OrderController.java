@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class OrderController {
 
     @GetMapping("/order/order")
     @ResponseBody
-    public List<ArtResponseDto> goToOrder(List<Long> artIdList, Model model) {
+    public List<ArtResponseDto> goToOrder(@RequestParam(value = "art_id[]") List<Long> artIdList, Model model) {
 
         List<ArtResponseDto> arts = new ArrayList<>();
         for (Long id : artIdList) { //Art Id를 통해서 Art 가져오기
