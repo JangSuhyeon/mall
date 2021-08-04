@@ -49,13 +49,48 @@
                         <h2>총 1개의 상품금액</h2>
                         <ul>
                             <li>합계</li>
-                            <li><span>123,000</span>원</li>
+                            <li><span th:id="total-order-price">1</span>원</li>
                         </ul>
                     </div>
-                    <button class="buy-btn">구매하기</button>
+                    <button class="buy-btn" th:id="buy-btn">구매하기</button>
                 </div>
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+    <script>
+        $('#buy-btn').click(function () {
+
+            IMP.init('imp49336905');
+            var money = $('#total-order-price').html();
+            console.log(money);
+
+            IMP.request_pay({
+                pg : 'kcp',
+                pay_method : 'card',
+                merchant_uid : 'merchant_' + new Date().getTime(),
+                name : 'mall' , //결제창에서 보여질 이름
+                amount : money, //실제 결제되는 가격
+                buyer_email : 'shjang0043@gmail.com',
+                buyer_name : '구매자이름',
+                buyer_tel : '',
+                buyer_addr : '',
+                buyer_postcode : ''
+            }, function(rsp) {
+                console.log(rsp);
+                if ( rsp.success ) {
+                    var msg = '결제가 완료되었습니다.';
+                    msg += '고유ID : ' + rsp.imp_uid;
+                    msg += '상점 거래ID : ' + rsp.merchant_uid;
+                    msg += '결제 금액 : ' + rsp.paid_amount;
+                    msg += '카드 승인번호 : ' + rsp.apply_num;
+                } else {
+                    var msg = '결제에 실패하였습니다.';
+                    msg += '에러내용 : ' + rsp.error_msg;
+                }
+                alert(msg);
+            });
+        });
+    </script>
 </div-->
 </html>
