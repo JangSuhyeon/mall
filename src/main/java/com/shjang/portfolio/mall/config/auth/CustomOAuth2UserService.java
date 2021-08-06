@@ -59,9 +59,9 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         User returnUser = userRepository.save(user);
 
         //회원가입 시 해당 User의 Id를 Cart에 INSERT
-        if (cartService.countByUserId(returnUser.getId()) <= 0) { //해당 UserId의 Cart가 없으면
-            cartService.createCart(returnUser.getId()); //Cart 생성
-        }
+        /*if (cartService.countByUserId(returnUser.getId()) <= 0) { //해당 UserId의 Cart가 없으면*/
+        cartService.createCart(returnUser.getId()); //Cart 생성
+        /*}*/
 
         return returnUser;
     }

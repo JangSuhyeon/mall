@@ -19,17 +19,13 @@ public class Cart {
 
     private Long userId; //cart user
 
-    @ElementCollection
-    @CollectionTable(name="arts_in_cart")
-    private List<Long> artIdList = new ArrayList<>(); //cart에 담은 Art들의 id
-
     public Cart(Long userId) {
         this.userId = userId;
     }
 
-    public List<Long> addToCart(Long artId) {
+    /*public List<Long> addToCart(Long artId) {
         artIdList.add(artId);
 
         return artIdList;
-    }
+    }*/
 }

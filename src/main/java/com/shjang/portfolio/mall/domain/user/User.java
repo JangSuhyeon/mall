@@ -1,6 +1,7 @@
 package com.shjang.portfolio.mall.domain.user;
 
 import com.shjang.portfolio.mall.domain.BaseTimeEntity;
+import com.shjang.portfolio.mall.domain.order.Cart;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

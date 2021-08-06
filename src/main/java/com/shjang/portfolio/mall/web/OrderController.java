@@ -4,6 +4,7 @@ import com.shjang.portfolio.mall.config.auth.LoginUser;
 import com.shjang.portfolio.mall.config.auth.dto.SessionUser;
 import com.shjang.portfolio.mall.domain.art.Art;
 import com.shjang.portfolio.mall.domain.order.Cart;
+import com.shjang.portfolio.mall.domain.order.CartArt;
 import com.shjang.portfolio.mall.domain.order.OrderEntity;
 import com.shjang.portfolio.mall.service.art.ArtService;
 import com.shjang.portfolio.mall.service.order.CartService;
@@ -33,23 +34,18 @@ public class OrderController {
     @GetMapping("/order/cart/{artId}")
     public String addToCart(@PathVariable Long artId, @LoginUser SessionUser user, Model model) {
 
-        if(cartService.countByArtId(artId) <= 0){ //담으려는 Art가 장바구니에 없으면 추가
-            cartService.save(artId, user.getId()); //Cart안에 있는 Art Id List가져오기
-        }
-
-        Cart cart = cartService.findByUserId(user.getId()); //해당 유저의 Cart가져오기
-        List<Long> artIdList = cart.getArtIdList(); //가져온 Cart안에 ArtId 가져오기
-
-        List<ArtResponseDto> art = new ArrayList<>();
-        for (Long id : artIdList) { //Art Id를 통해서 Art 가져오기
-            art.add(artService.findById(id));
-        }
-
-        model.addAttribute("arts",art);
-
-        if (user != null) {
-            model.addAttribute("userId", user.getId());
-        }
+        Cart cart = cartService.findByUserId(user.getId());
+        ArtResponseDto artResponseDto = artService.findById(artId);
+        Art art = Art.builder()
+                .title(artResponseDto.getTitle())
+                .artist(artResponseDto.getArtist())
+                .description(artResponseDto.getDescription())
+                .price(artResponseDto.getPrice())
+                .userId(artResponseDto.getUserId())
+                .artImage(artResponseDto.getArtImage())
+                .categoryId(artResponseDto.getCategoryId())
+                .build();
+        cartService.addToCart(new CartArt(cart,art));
 
         return "order/cart";
     }
@@ -58,7 +54,7 @@ public class OrderController {
     @GetMapping("/order/cart")
     public String goToCart(@LoginUser SessionUser user, Model model) {
 
-        Cart cart = cartService.findByUserId(user.getId()); //해당 유저의 Cart가져오기
+        /*Cart cart = cartService.findByUserId(user.getId()); //해당 유저의 Cart가져오기
         List<Long> artIdList = cart.getArtIdList(); //가져온 Cart안에 ArtId 가져오기
 
         List<ArtResponseDto> art = new ArrayList<>();
@@ -70,7 +66,7 @@ public class OrderController {
 
         if (user != null) {
             model.addAttribute("userId", user.getId());
-        }
+        }*/
 
         return "order/cart";
     }
