@@ -36,11 +36,18 @@ public class ArtService {
         return id;
     }
 
-    //작품 id로 작품 찾기
+    //작품 id로 작품 찾기 (return ArtResponseDto)
     public ArtResponseDto findById (Long id){
         Art entity = artRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 작품이 없습니다. id=" + id));
 
         return new ArtResponseDto(entity);
+    }
+
+    //작품 id로 작품 찾기 (return Art)
+    public Art findByIdToArt (Long id){
+        Art entity = artRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 작품이 없습니다. id=" + id));
+
+        return entity;
     }
 
     //작품 전체 찾기 

@@ -22,10 +22,4 @@ public class Cart {
     public Cart(Long userId) {
         this.userId = userId;
     }
-
-    /*public List<Long> addToCart(Long artId) {
-        artIdList.add(artId);
-
-        return artIdList;
-    }*/
 }
