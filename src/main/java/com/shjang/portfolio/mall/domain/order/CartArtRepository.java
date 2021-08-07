@@ -13,4 +13,7 @@ public interface CartArtRepository extends JpaRepository<CartArt,Long> {
     @Query(value = "SELECT count(*) FROM cart_art WHERE cart_art.art_id = ?1",nativeQuery = true)
     Integer countByArtId(Long artId);
 
+    @Query(value = "SELECT id FROM cart_art WHERE cart_art.art_id = ?1",nativeQuery = true)
+    Long findByArtId(Long artId);
+
 }

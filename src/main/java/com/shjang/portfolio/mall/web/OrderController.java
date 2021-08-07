@@ -14,10 +14,7 @@ import com.shjang.portfolio.mall.web.dto.ArtResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,6 +102,16 @@ public class OrderController {
         model.addAttribute("arts",art);
         
         return "order/order";
+    }
+
+    //장바구니에서 Art 삭제
+    @DeleteMapping("/order/delete/{id}")
+    @ResponseBody
+    public Long cartDelete(@PathVariable Long id) {
+
+        cartService.deleteCart(id);
+
+        return id;
     }
 
 }

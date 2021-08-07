@@ -54,4 +54,11 @@ public class CartService {
         return cartArtRepository.findByCartId(cartId);
     }
 
+    //Cart 안에 Art 삭제
+    @Transactional
+    public void deleteCart(Long artId) {
+        Long cartArtId = cartArtRepository.findByArtId(artId);
+        cartArtRepository.deleteById(cartArtId);
+    }
+
 }

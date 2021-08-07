@@ -7,6 +7,9 @@ var order = {
         $('#all-choice-btn').on('click',function () {
             _this.goToALlChoiceOrder();
         });
+        $('#delete-cart-btn').on('click',function () {
+            _this.deleteCart();
+        });
     },
 
     goToChoiceOrder : function () {
@@ -44,6 +47,21 @@ var order = {
             }
         }).done(function () {
             window.location.href = '/order/order/'+id;
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+
+    deleteCart : function () {
+        var id = $('.hidden-art-id').val();
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/order/delete/' + id,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8'
+        }).done(function () {
+            window.location.href = '/order/cart';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });

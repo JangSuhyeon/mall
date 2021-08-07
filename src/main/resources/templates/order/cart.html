@@ -12,6 +12,7 @@
                             <tr>
                                 <th style="width:500px;">상품명</th>
                                 <th style="width:145px;">금액</th>
+                                <th style="width:145px;">삭제</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -23,6 +24,7 @@
                                     <p th:text="${art.getTitle()}"></p>
                                 </td>
                                 <td class="price"><span th:text="${#numbers.formatDecimal(art.getPrice(), 0, 'COMMA', 0, 'POINT')}"></span>원</td>
+                                <td><input th:type="button" th:id="delete-cart-btn" th:value="삭제"></td>
                             </tr>
                             </tbody>
                         </table>

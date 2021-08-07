@@ -7,7 +7,7 @@
         <ul class="edit-form">
           <li class="title">Category</li>
           <li class="content">
-            <select onchange="categoryChange(this)">
+            <select onchange="categoryChange(this)" th:id="bigCategory">
               <option>== 대분류 선택 ==</option>
               <option value="a">명화</option>
               <option value="b">추상화</option>
@@ -63,12 +63,12 @@
           </li>
           <li class="title">Price</li>
           <li class="content">
-            <input type="text" th:id="price" placeholder="판매금액을 입력해주세요">
+            <input type="number" th:id="price" placeholder="판매금액을 입력해주세요">
           </li>
           <li class="title">Image</li>
           <li class="content">
             <div class="filebox">
-              <input type="file" id="file" name="file">
+              <input type="file" id="file" name="file" accept="image/*">
 
               <input class="upload-name" value="파일을 선택해주세요">
               <label for="file">파일선택</label>
