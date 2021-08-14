@@ -2,9 +2,109 @@
 <div layout:fragment="content">
     <div class="main" id="fullpage">
         <div class="edit-container">
-            <h2>작품 등록</h2>
+            <h2>작품 수정</h2>
             <form enctype="multipart/form-data" id="form">
                 <ul class="edit-form">
+                    <li class="title">Category</li>
+                    <li class="content">
+                        <select onchange="categoryChange(this)" th:id="bigCategory">
+                            <option>== 대분류 선택 ==</option>
+                            <option value="a">명화</option>
+                            <option value="b">추상화</option>
+                            <option value="c">모던아트</option>
+                        </select>
+                        <input th:id="categoryId" th:type="hidden" th:value="${art.categoryId}">
+                        <script>
+                            var cateId = $('#categoryId').val();
+                            // category Id에 따라 대분류 변경
+                            if(cateId==1 || cateId==2 || cateId==3){
+                                $('#bigCategory').find('option:eq(1)').prop('selected', true);
+                            } else if (cateId==4){
+                                $('#bigCategory').find('option:eq(2)').prop('selected', true);
+                            } else if (cateId==5 || cateId==6 || cateId==7 || cateId==8){
+                                $('#bigCategory').find('option:eq(3)').prop('selected', true);
+                            }
+                        </script>
+
+                        <select th:id="category">
+                            <option>== 소분류 선택 ==</option>
+                        </select>
+                        <script>
+                            //category insert
+                            var a = ["명화", "동양화"];
+                            var b = ["추상화"];
+                            var c = ["오브제", "사진", "팝아트"];
+                            var aId = [2,3];
+                            var bId = [4];
+                            var cId = [6,7,8];
+                            var category = document.getElementById("category");
+
+                            function categoryChange(e) {
+                                //소분류를 변경했을 때
+
+                                if(e.value == "a") {
+                                    var smllCate = a;
+                                    var smallCateId = aId;
+                                } else if(e.value == "b") {
+                                    var smllCate = b;
+                                    var smallCateId = bId;
+                                } else if(e.value == "c") {
+                                    var smllCate = c;
+                                    var smallCateId = cId;
+                                }
+
+                                category.options.length = 0; //option 초기화
+
+                                for (x in smllCate) {
+                                    var opt = document.createElement("option");
+                                    opt.value = smallCateId[x];
+                                    opt.innerHTML = smllCate[x];
+                                    category.appendChild(opt);
+                                }
+                            }
+
+                            function categoryLoad(bigCate, cateId) {
+                                //작품 수정페이지를 처음 load했을 때
+
+                                if(bigCate.val() == "a") {
+                                    var smllCate = a;
+                                    var smallCateId = aId;
+                                } else if(bigCate.val() == "b") {
+                                    var smllCate = b;
+                                    var smallCateId = bId;
+                                } else if(bigCate.val() == "c") {
+                                    var smllCate = c;
+                                    var smallCateId = cId;
+                                }
+
+                                category.options.length = 0; //option 초기화
+
+                                for (x in smllCate) {
+                                    var opt = document.createElement("option");
+                                    opt.value = smallCateId[x];
+                                    opt.innerHTML = smllCate[x];
+                                    category.appendChild(opt);
+                                }
+
+                                if(cateId == 1 || cateId == 2){
+                                    $('#category').find('option:eq(0)').prop('selected', true);
+                                }else if(cateId == 3){
+                                    $('#category').find('option:eq(1)').prop('selected', true);
+                                }else if(cateId == 4){
+                                    $('#category').find('option:eq(0)').prop('selected', true);
+                                }else if(cateId == 5 || cateId == 6){
+                                    $('#category').find('option:eq(0)').prop('selected', true);
+                                }else if(cateId == 7){
+                                    $('#category').find('option:eq(1)').prop('selected', true);
+                                }else if(cateId == 8){
+                                    $('#category').find('option:eq(2)').prop('selected', true);
+                                }
+                            }
+
+                            var bigCate = $("#bigCategory option:selected");
+                            categoryLoad(bigCate,cateId);
+                        </script>
+                    </li>
                     <li><input th:type="hidden" th:id="id" th:value="${art.id}"></li>
                     <li class="title">Title</li>
                     <li class="content">
@@ -12,7 +112,7 @@
                     </li>
                     <li class="title">Artist</li>
                     <li class="content">
-                        <input type="text" th:id="artist" th:value="${art.artist}" readonly>
+                        <input type="text" th:id="artist" th:value="${art.artist}">
                     </li>
                     <li class="title">Description</li>
                     <li class="content">
@@ -20,12 +120,12 @@
                     </li>
                     <li class="title">Price</li>
                     <li class="content">
-                        <input type="text" th:id="price" th:value="${art.price}">
+                        <input type="number" th:id="price" th:value="${art.price}">
                     </li>
                     <li class="title">Image</li>
                     <li class="content">
                         <div class="filebox">
-                            <input type="file" id="file" name="file">
+                            <input type="file" id="file" name="file" accept="image/*">
 
                             <input class="upload-name" value="파일을 선택해주세요">
                             <label for="file">파일선택</label>

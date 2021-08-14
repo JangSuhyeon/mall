@@ -15,6 +15,13 @@ var order = {
     goToChoiceOrder : function () {
         var id = $('.userId').val();
         var checkArr = [];
+
+        var count = $('.checkbox:checked').get().length;
+        if(count <= 0) {
+            alert("작품을 1개 이상 선택해주세요.");
+            return false;
+        }
+
         $('.checkbox:checked').each(function () {
             checkArr.push($(this).val());
         });

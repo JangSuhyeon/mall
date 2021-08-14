@@ -51,12 +51,19 @@ var main = {
             artist: $('#artist').val(),
             description: $('#description').val(),
             price: $('#price').val(),
+            categoryId: $('#category').val(),
             artImageId: $('#artImageId').val()
+        };
+        var file = $('#file').val();
+
+        //값 유효성 체크
+        if (this.checkNoFile(data) == false) {
+            return false
         };
 
         var form=$('#form')[0];
         var formData = new FormData(form);
-        formData.append('file',$('#file'));
+        formData.append('file',file);
         formData.append('key', new Blob([JSON.stringify(data)], {type: "application/json"}));
         var id = $('#id').val();
 
@@ -113,8 +120,30 @@ var main = {
             alert('작품 썸네일 이미지를 등록해주세요.');
             return false;
         }
+    },
+    checkNoFile : function (data) {
+        if (!jQuery.isNumeric(data.categoryId)) {
+            alert('카테고리를 선택해주세요.');
+            $('#bigCategory').focus();
+            return false;
+        } else if (data.title.length == 0) {
+            alert('작품 제목을 입력해주세요.');
+            $('#title').focus();
+            return false;
+        } else if (data.artist.length == 0) {
+            alert('작가를 입력해주세요.');
+            $('#artist').focus();
+            return false;
+        } else if (data.description.length == 0) {
+            alert('작품 간단 설명을 입력해주세요.');
+            $('#description').focus();
+            return false;
+        } else if (data.price.length == 0) {
+            alert('작품 판매금액을 등록해주세요.');
+            $('#price').focus();
+            return false;
+        }
     }
-
 }
 
 main.init();

@@ -51,6 +51,7 @@
     border-bottom:1px solid #ddd;
 }
 .order-page .order-wrapper .order-list table td {
+    text-align:center;
     vertical-align: middle;
     padding:30px 13px;
     border-bottom:1px solid #ddd;

@@ -20,6 +20,17 @@ public class ArtService {
 
     private final ArtRepository artRepository;
 
+    //작품 전체 찾기
+    @Transactional(readOnly = true)
+    public List<ArtListResponseDto> findAllDesc() {
+        List<ArtListResponseDto> artListResponseDtos = artRepository.findAllDesc().stream().map(ArtListResponseDto::new).collect(Collectors.toList());
+        for (ArtListResponseDto dto : artListResponseDtos) {
+            System.out.println(dto.getId() + "!!!");
+        }
+
+        return artRepository.findAllDesc().stream().map(ArtListResponseDto::new).collect(Collectors.toList());
+    }
+
     //작품 저장
     @Transactional
     public Long save(ArtSaveRequestDto requestDto){
@@ -48,17 +59,6 @@ public class ArtService {
         Art entity = artRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 작품이 없습니다. id=" + id));
 
         return entity;
-    }
-
-    //작품 전체 찾기 
-    @Transactional(readOnly = true)
-    public List<ArtListResponseDto> findAllDesc() {
-        List<ArtListResponseDto> artListResponseDtos = artRepository.findAllDesc().stream().map(ArtListResponseDto::new).collect(Collectors.toList());
-        for (ArtListResponseDto dto : artListResponseDtos) {
-            System.out.println(dto.getId() + "!!!");
-        }
-
-        return artRepository.findAllDesc().stream().map(ArtListResponseDto::new).collect(Collectors.toList());
     }
 
     //작품 삭제

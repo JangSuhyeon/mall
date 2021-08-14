@@ -6,6 +6,7 @@ import com.shjang.portfolio.mall.domain.art.Art;
 import com.shjang.portfolio.mall.domain.art.ArtImage;
 import com.shjang.portfolio.mall.service.art.ArtImageService;
 import com.shjang.portfolio.mall.service.art.ArtService;
+import com.shjang.portfolio.mall.service.order.CartService;
 import com.shjang.portfolio.mall.util.MD5Generator;
 import com.shjang.portfolio.mall.web.dto.ArtResponseDto;
 import com.shjang.portfolio.mall.web.dto.ArtSaveRequestDto;
@@ -25,6 +26,7 @@ ArtApiController {
 
     private final ArtService artService; //작품 서비스
     private final ArtImageService artImageService; //작품 이미지 서비스
+    private final CartService cartService; //장바구니 서비스
 
     //작품 저장
     @PostMapping("/api/v1/art")
@@ -100,8 +102,9 @@ ArtApiController {
     public Long delete(@PathVariable Long id) {
 
         ArtResponseDto art  = artService.findById(id);
-        artService.delete(id); //작품 삭제
 
+        cartService.deleteCart(id); //장바구니 삭제
+        artService.delete(id); //작품 삭제
         artImageService.delete(art.getArtImage().getId()); //연결된 작품 이미지 삭제
 
         return id;
