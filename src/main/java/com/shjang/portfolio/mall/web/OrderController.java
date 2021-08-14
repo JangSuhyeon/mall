@@ -8,6 +8,7 @@ import com.shjang.portfolio.mall.domain.order.CartArt;
 import com.shjang.portfolio.mall.domain.order.OrderEntity;
 import com.shjang.portfolio.mall.service.art.ArtService;
 import com.shjang.portfolio.mall.service.order.CartService;
+import com.shjang.portfolio.mall.service.order.OrderCompleteService;
 import com.shjang.portfolio.mall.service.order.OrderService;
 import com.shjang.portfolio.mall.web.dto.ArtListResponseDto;
 import com.shjang.portfolio.mall.web.dto.ArtResponseDto;
@@ -26,6 +27,7 @@ public class OrderController {
     private final ArtService artService;
     private final CartService cartService;
     private final OrderService orderService;
+    private final OrderCompleteService orderCompleteService;
 
     // Detail페이지에서 장바구니 담았을 때
     @GetMapping("/order/cart/{artId}")
@@ -44,7 +46,8 @@ public class OrderController {
         findArtIdList(cart,model);
 
         if (user != null) {
-            model.addAttribute("userId", user.getId());
+            model.addAttribute("userName",user.getName());
+            model.addAttribute("userId",user.getId());
         }
 
         return "order/cart";
@@ -58,7 +61,8 @@ public class OrderController {
         findArtIdList(cart,model);
 
         if (user != null) {
-            model.addAttribute("userId", user.getId());
+            model.addAttribute("userName",user.getName());
+            model.addAttribute("userId",user.getId());
         }
 
         return "order/cart";
@@ -100,6 +104,10 @@ public class OrderController {
         }
 
         model.addAttribute("arts",art);
+
+        if (user != null) {
+            model.addAttribute("userName",user.getName());
+        }
         
         return "order/order";
     }
@@ -112,6 +120,20 @@ public class OrderController {
         cartService.deleteCart(id);
 
         return id;
+    }
+
+    @GetMapping("/order/complete")
+    @ResponseBody
+    public void addToOrderComplete(@RequestParam(value = "art_id[]") List<Long> artIdList,@LoginUser SessionUser user) {
+        
+        orderCompleteService.createOrderComplete(user.getId()); //완료된 주문 생성
+
+        for (Long artId : artIdList) {
+            orderCompleteService.save(artId,user.getId());
+        }
+
+
+
     }
 
 }

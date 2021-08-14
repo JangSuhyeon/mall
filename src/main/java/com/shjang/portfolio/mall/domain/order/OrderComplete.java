@@ -6,32 +6,32 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Getter
 @NoArgsConstructor
 @Entity
-public class OrderEntity extends BaseTimeEntity {
-    
+public class OrderComplete extends BaseTimeEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private Long userId;
 
     @ElementCollection
-    @CollectionTable(name="arts_in_order")
+    @CollectionTable(name="arts_in_orderComplete")
     private List<Long> artIdList = new ArrayList<>(); //주문할 담은 Art들의 id
 
-    public OrderEntity(Long userId) {
+    public OrderComplete(Long userId) {
         this.userId = userId;
     }
 
-    public List<Long> addToOrder(Long artId) {
+    public List<Long> addToOrderComplete(Long artId) {
 
         artIdList.add(artId);
 
         return artIdList;
     }
+
 }

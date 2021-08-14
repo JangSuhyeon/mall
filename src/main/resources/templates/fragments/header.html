@@ -9,7 +9,7 @@
                 <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Login</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/order/cart}">Cart</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
-                <li sec:authorize="isAuthenticated()"><a th:href="@{/}" th:text="${userName}"></a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/mypage}" th:text="${userName}"></a></li>
             </ul>
         </div>
     </header>

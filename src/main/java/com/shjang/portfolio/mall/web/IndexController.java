@@ -71,6 +71,7 @@ public class IndexController {
 
         if (user != null) {
             model.addAttribute("sessionUser",user);
+            model.addAttribute("userName",user.getName());
         }
 
         ArtResponseDto art = artService.findById(id);
