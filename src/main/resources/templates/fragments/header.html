@@ -4,8 +4,8 @@
         <div class="container">
             <a href="/"><img src="/images/logo_wh.png"></a>
             <ul class="main-menu">
-                <li><a th:href="@{/art/list}">Shop</a></li>
-                <li><a href="">Contact</a></li>
+                <li><a th:href="@{'/art/list?page=' + 1}">Shop</a></li>
+<!--                <li><a href="">Contact</a></li>-->
                 <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Login</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/order/cart}">Cart</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>

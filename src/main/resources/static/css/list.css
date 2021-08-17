@@ -111,3 +111,13 @@
     color:#fff;
     margin-bottom:10px;
 }
+
+.page-container {
+    text-align:Center;
+}
+.page > a {
+    font-size:18px;
+    font-weight:bold;
+    color:#c6c6c6;
+    padding:0 10px;
+}

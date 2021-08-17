@@ -47,6 +47,20 @@
           </li>
         </ul>
       </div>
+      <div class="page-container">
+        <span th:each="pageNum : ${pageList}" th:inline="text" class="page">
+          <a th:href="@{'/art/list?page=' + ${pageNum}}">[[${pageNum}]]</a>
+        </span>
+        <script>
+          var pageNum = location.search.split("?page=");
+          $(top.document).find('.page').each(function(){
+            if(pageNum[1] == $(this).find('a').text()){
+              $(this).find('a').css({"color":"#0080ff"});
+            }
+          });
+
+        </script>
+      </div>
     </div>
   </div>
 </div>

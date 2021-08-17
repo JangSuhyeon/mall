@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.mail.Session;
 import javax.servlet.http.HttpSession;
@@ -38,7 +39,7 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user) {
 
-        model.addAttribute("arts",artService.findAllDesc());
+        model.addAttribute("arts",artService.findAllDescToIndex());
 
         if (user != null) {
             model.addAttribute("userName",user.getName());
@@ -100,13 +101,17 @@ public class IndexController {
 
     //shop 페이지 (작품 리스트)
     @GetMapping("/art/list")
-    public String artList(Model model, @LoginUser SessionUser user) {
+    public String artList(Model model, @RequestParam(value = "page", defaultValue = "1") Integer pageNum, @LoginUser SessionUser user) {
+
+        List<ArtListResponseDto> artList = artService.findAllDesc(pageNum);
+        Integer[] pageList = artService.getPageList(pageNum);
 
         if (user != null) {
             model.addAttribute("userName",user.getName());
         }
 
-        model.addAttribute("arts",artService.findAllDesc());
+        model.addAttribute("pageList",pageList);
+        model.addAttribute("arts",artList);
 
         //작품 수
         model.addAttribute("count",artService.count());
