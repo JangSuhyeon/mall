@@ -21,8 +21,9 @@ public class OrderCompleteService {
     }
 
     @Transactional
-    public List<Long> save(Long artId, Long userId) {
-        OrderComplete orderComplete = orderCompleteRepository.findByUserId(userId);
+    public List<Long> save(Long artId, Long orderCompleteId) {
+        //orderComplete에 주문한 art Id 저장
+        OrderComplete orderComplete = orderCompleteRepository.findById(orderCompleteId).get();
         return orderComplete.addToOrderComplete(artId);
     }
 

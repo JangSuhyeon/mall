@@ -20,7 +20,9 @@
                                 <td class="name">
                                     <input th:type="hidden" th:value="${art.getId()}" class="hidden-art-id">
                                     <input type="checkbox" name="checkbox" class="checkbox" th:value="${art.getId()}" checked>
-                                    <span class="thumb"><img th:src="@{/images/thumbnail/{fileName}(fileName=${art.getArtImage().getFilename()})}"></span>
+                                    <span class="thumb" th:onclick="'location.href=\''+ @{/art/detail/{id}(id=${art.getId()})} + '\''">
+                                        <img th:src="@{/images/thumbnail/{fileName}(fileName=${art.getArtImage().getFilename()})}">
+                                    </span>
                                     <p th:text="${art.getTitle()}"></p>
                                 </td>
                                 <td class="price"><span th:text="${#numbers.formatDecimal(art.getPrice(), 0, 'COMMA', 0, 'POINT')}"></span>원</td>

@@ -76,6 +76,7 @@
     font-weight:bold;
 }
 .order-page .order-wrapper .order-list table span.thumb {
+    cursor:pointer;
     display: inline-block;
     width:125px;
     height:125px;
@@ -192,6 +193,7 @@
     margin:34px 13px 0 0;
 }
 .order-page .order-wrapper .cart-list table td.name > .thumb {
+    cursor: pointer;
     width:90px;
     height:90px;
 }

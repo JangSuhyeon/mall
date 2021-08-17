@@ -61,6 +61,7 @@
     font-weight:bold;
 }
 .mypage-list > table span.thumb {
+    cursor:pointer;
     display: inline-block;
     width:125px;
     height:125px;

@@ -18,7 +18,7 @@
           <tr th:each="art : ${arts}">
             <td class="date" th:text="${art.getOrderDate()}">2021-08-16</td>
             <td class="name">
-              <span class="thumb"><img th:src="@{/images/thumbnail/{fileName}(fileName=${art.getArtImage().getFilename()})}"></span>
+              <span class="thumb" th:onclick="'location.href=\''+ @{/art/detail/{id}(id=${art.getId()})} + '\''"><img th:src="@{/images/thumbnail/{fileName}(fileName=${art.getArtImage().getFilename()})}"></span>
               <p th:text="${art.getTitle()}">작품명입니다.작품명입니다.작품명입니다.작품명입니다.작품명입니다.작품명입니다.</p>
             </td>
             <td class="price" th:text="${art.getPrice()}">45,000원</td>

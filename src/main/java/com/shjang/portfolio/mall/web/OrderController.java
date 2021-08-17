@@ -126,10 +126,10 @@ public class OrderController {
     @ResponseBody
     public void addToOrderComplete(@RequestParam(value = "art_id[]") List<Long> artIdList,@LoginUser SessionUser user) {
         
-        orderCompleteService.createOrderComplete(user.getId()); //완료된 주문 생성
+        Long orderCompleteId = orderCompleteService.createOrderComplete(user.getId()); //완료된 주문 생성
 
         for (Long artId : artIdList) {
-            orderCompleteService.save(artId,user.getId());
+            orderCompleteService.save(artId,orderCompleteId);
         }
     }
 
