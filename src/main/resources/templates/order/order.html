@@ -16,7 +16,7 @@
                             </thead>
                             <tbody>
                             <tr class="art" th:each="art : ${arts}">
-                                <input th:type="hidden" th:id="hidden-id" th:value="${art.getId()}">
+                                <input th:type="hidden" th:class="hidden-id" th:value="${art.getId()}">
                                 <td class="name">
                                     <span class="thumb"><img th:src="@{/images/thumbnail/{fileName}(fileName=${art.getArtImage().getFilename()})}"></span>
                                     <p th:text="${art.getTitle()}">작품명입니다.작품명입니다.작품명입니다.작품명입니다.작품명입니다.작품명입니다.</p>

@@ -1,5 +1,37 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout-list">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout-mypage">
 <div-- layout:fragment="content">
   <div class="main">
+    <div class="main-container mypage-page">
+      <h2>주문목록</h2>
+      <div class="mypage-list">
+        <h2>주문목록 / 배송조회 내역 총 <span>0</span> 건</h2>
+        <table>
+          <thead>
+          <tr>
+            <th style="width:15%;">주문날짜</th>
+            <th style="width:50%;">작품명</th>
+            <th style="width:20%;">금액</th>
+            <th style="width:15%;">주문상태</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="art : ${arts}">
+            <td class="date" th:text="${art.getOrderDate()}">2021-08-16</td>
+            <td class="name">
+              <span class="thumb"><img th:src="@{/images/thumbnail/{fileName}(fileName=${art.getArtImage().getFilename()})}"></span>
+              <p th:text="${art.getTitle()}">작품명입니다.작품명입니다.작품명입니다.작품명입니다.작품명입니다.작품명입니다.</p>
+            </td>
+            <td class="price" th:text="${art.getPrice()}">45,000원</td>
+            <td class="status">배송준비중</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script>
+      //주문 완료된 상품 갯수
+      var count = $('.mypage-list > table tbody tr').length;
+      $('.mypage-list > h2 > span').text(count);
+    </script>
   </div>
 </div-->

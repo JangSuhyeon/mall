@@ -131,9 +131,6 @@ public class OrderController {
         for (Long artId : artIdList) {
             orderCompleteService.save(artId,user.getId());
         }
-
-
-
     }
 
 }

@@ -3,9 +3,12 @@ package com.shjang.portfolio.mall.web;
 import com.shjang.portfolio.mall.config.auth.CustomOAuth2UserService;
 import com.shjang.portfolio.mall.config.auth.LoginUser;
 import com.shjang.portfolio.mall.config.auth.dto.SessionUser;
+import com.shjang.portfolio.mall.domain.order.OrderComplete;
 import com.shjang.portfolio.mall.service.art.ArtImageService;
 import com.shjang.portfolio.mall.service.art.ArtService;
 import com.shjang.portfolio.mall.service.art.CategoryService;
+import com.shjang.portfolio.mall.service.order.OrderCompleteService;
+import com.shjang.portfolio.mall.service.order.OrderService;
 import com.shjang.portfolio.mall.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,12 +17,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpSession;
 import java.io.File;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Controller
@@ -28,6 +32,7 @@ public class IndexController {
     private final ArtService artService; //작품 Service
     private final CategoryService categoryService; //카테고리 Service
     private final CustomOAuth2UserService userService; //회원 Service
+    private final OrderCompleteService orderCompleteService; //완료된 주문 Service
 
     //main 페이지
     @GetMapping("/")
@@ -107,5 +112,48 @@ public class IndexController {
         model.addAttribute("count",artService.count());
 
         return "list";
+    }
+
+    //mypage
+    @GetMapping("/mypage")
+    public String mypage(Model model, @LoginUser SessionUser user) {
+        
+        //불러온 주문 리스트의 모든 작품들을 넣기 위해
+        List<OrderArtResponseDto> orderArtList = new ArrayList<>();
+
+        //userId에 해당하는 orderComplete 리스트 불러오기
+        List<OrderComplete> orderCompleteList = orderCompleteService.findOrderCompleteByUserId(user.getId());
+        for (OrderComplete orderComplete : orderCompleteList) {
+
+            //각각의 orderComplete 리스트의 Art id들을 가져오기
+            List<Long> idList = orderComplete.getArtIdList();
+            
+            for (Long id : idList) {
+                //가져온 Art id로 Art를 조회해 orderArtList에 주문날짜와 같이 넣기
+                ArtResponseDto art = artService.findById(id);
+
+                //LocalDateTime을 LocalDate로 변경
+                LocalDateTime createdDate = orderComplete.getCreatedDate();
+                LocalDate orderDate = LocalDate.from(createdDate);
+
+                orderArtList.add(OrderArtResponseDto.builder()
+                        .id(art.getId())
+                        .title(art.getTitle())
+                        .price(art.getPrice())
+                        .artImage(art.getArtImage())
+                        .orderDate(orderDate)
+                        .build()
+                );
+            }
+        }
+
+        //OrderArtResponseDto에 주문날짜와 Art 합치기
+        model.addAttribute("arts",orderArtList);
+
+        if (user != null) {
+            model.addAttribute("userName",user.getName());
+        }
+
+        return "mypage";
     }
 }

@@ -26,4 +26,10 @@ public class OrderCompleteService {
         return orderComplete.addToOrderComplete(artId);
     }
 
+    @Transactional
+    public List<OrderComplete> findOrderCompleteByUserId(Long userId) {
+        //userId에 해당하는 완료된 주문 리스트 불러오기
+        return orderCompleteRepository.findByUserIdToList(userId);
+    }
+
 }
