@@ -53,6 +53,20 @@ public class ArtService {
         return artListResponseDtos;
     }
 
+    //특정 카테고리의 작품 찾기 (Shop - page가 필요없는 경우)
+    @Transactional(readOnly = true)
+    public List<ArtListResponseDto> findAllDescCate(int category) {
+
+        List<Art> arts = artRepository.findAllCate(category);
+        List<ArtListResponseDto> artListResponseDtos = new ArrayList<>();
+        for (Art art : arts) {
+            artListResponseDtos.add(new ArtListResponseDto(art));
+        }
+
+        return artListResponseDtos;
+    }
+
+
     public Integer[] getPageList(Integer curPageNum) {
         Integer[] pageList = new Integer[BLOCK_PAGE_NUM_COUNT];
 
@@ -121,10 +135,16 @@ public class ArtService {
         artRepository.delete(art);
     }
 
-    //작품 총 갯수
+    //전체 작품 총 갯수
     @Transactional
     public Long count() {
         return artRepository.count();
+    }
+
+    //작품 총 갯수
+    @Transactional
+    public Integer cateCount(int categoryId) {
+        return artRepository.cateCount(categoryId);
     }
 
 }

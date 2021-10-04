@@ -113,8 +113,33 @@ public class IndexController {
         model.addAttribute("pageList",pageList);
         model.addAttribute("arts",artList);
 
+        //카테고리명을 '전체 작품'으로 직접 지정
+        model.addAttribute("categoryName","전체 작품");
+
         //작품 수
         model.addAttribute("count",artService.count());
+
+        return "list";
+    }
+
+    //shop 페이지 (카테고리로 조회)
+    @GetMapping("/art/list/{category}")
+    public String artListCate(Model model, @PathVariable int category, @LoginUser SessionUser user) {
+
+        List<ArtListResponseDto> artList = artService.findAllDescCate(category);
+
+        if (user != null) {
+            model.addAttribute("userName",user.getName());
+        }
+
+        model.addAttribute("arts",artList);
+
+        //카테고리명 찾기
+        String cateName = categoryService.findById(category).getName();
+        model.addAttribute("categoryName",cateName);
+
+        //카테고리에 속해있는 Art 수
+        model.addAttribute("count",artService.cateCount(category));
 
         return "list";
     }
