@@ -112,6 +112,7 @@ header {
     color:#fff;
     font-weight:bold;
     text-align:Center;
+    cursor:pointer;
 }
 .page2 .btn-group > a:first-child {
     margin-right:10px;

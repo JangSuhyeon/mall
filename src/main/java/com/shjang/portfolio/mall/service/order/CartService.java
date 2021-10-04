@@ -57,8 +57,10 @@ public class CartService {
     //Cart 안에 Art 삭제
     @Transactional
     public void deleteCart(Long artId) {
-        Long cartArtId = cartArtRepository.findByArtId(artId);
-        cartArtRepository.deleteById(cartArtId);
+        if (cartArtRepository.countByArtId(artId)!=0){ //삭제되야하는 Art가 Cart에 있다면
+            Long cartArtId = cartArtRepository.findByArtId(artId);
+            cartArtRepository.deleteById(cartArtId);
+        }
     }
 
 }
