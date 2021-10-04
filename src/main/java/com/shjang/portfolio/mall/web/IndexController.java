@@ -153,27 +153,29 @@ public class IndexController {
 
         //userId에 해당하는 orderComplete 리스트 불러오기
         List<OrderComplete> orderCompleteList = orderCompleteService.findOrderCompleteByUserId(user.getId());
-        for (OrderComplete orderComplete : orderCompleteList) {
+        if (orderCompleteList.size() > 0) { //orderCompleteList안에 Art가 있을 경우에만 실행
+            for (OrderComplete orderComplete : orderCompleteList) {
 
-            //각각의 orderComplete 리스트의 Art id들을 가져오기
-            List<Long> idList = orderComplete.getArtIdList();
-            
-            for (Long id : idList) {
-                //가져온 Art id로 Art를 조회해 orderArtList에 주문날짜와 같이 넣기
-                ArtResponseDto art = artService.findById(id);
+                //각각의 orderComplete 리스트의 Art id들을 가져오기
+                List<Long> idList = orderComplete.getArtIdList();
 
-                //LocalDateTime을 LocalDate로 변경
-                LocalDateTime createdDate = orderComplete.getCreatedDate();
-                LocalDate orderDate = LocalDate.from(createdDate);
+                for (Long id : idList) {
+                    //가져온 Art id로 Art를 조회해 orderArtList에 주문날짜와 같이 넣기
+                    ArtResponseDto art = artService.findById(id);
 
-                orderArtList.add(OrderArtResponseDto.builder()
-                        .id(art.getId())
-                        .title(art.getTitle())
-                        .price(art.getPrice())
-                        .artImage(art.getArtImage())
-                        .orderDate(orderDate)
-                        .build()
-                );
+                    //LocalDateTime을 LocalDate로 변경
+                    LocalDateTime createdDate = orderComplete.getCreatedDate();
+                    LocalDate orderDate = LocalDate.from(createdDate);
+
+                    orderArtList.add(OrderArtResponseDto.builder()
+                            .id(art.getId())
+                            .title(art.getTitle())
+                            .price(art.getPrice())
+                            .artImage(art.getArtImage())
+                            .orderDate(orderDate)
+                            .build()
+                    );
+                }
             }
         }
 

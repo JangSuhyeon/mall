@@ -33,4 +33,9 @@ public class OrderCompleteService {
         return orderCompleteRepository.findByUserIdToList(userId);
     }
 
+    @Transactional
+    public int countByUserId(Long userId) {
+        return orderCompleteRepository.countByUserId(userId);
+    }
+
 }

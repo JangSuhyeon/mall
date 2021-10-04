@@ -10,4 +10,6 @@ public interface OrderCompleteRepository extends JpaRepository<OrderComplete,Lon
     @Query(value = "SELECT * FROM order_complete where order_complete.user_id = ?1",nativeQuery = true)
     List<OrderComplete> findByUserIdToList(Long userId); //User Id로 Order 가져오기
 
+    @Query(value = "SELECT count(*) FROM order_complete where order_complete.user_id = ?1",nativeQuery = true)
+    int countByUserId(Long userId);
 }
